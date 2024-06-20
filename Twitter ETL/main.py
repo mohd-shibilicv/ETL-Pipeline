@@ -6,6 +6,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 
+# ETL Functions (same as above)
 def extract_tweets(query, limit=100):
     tweets = []
     for tweet in sntwitter.TwitterSearchScraper(query).get_items():
@@ -64,7 +65,7 @@ dag = DAG(
     "twitter_etl_dag",
     default_args=default_args,
     description="A simple Twitter ETL pipeline",
-    schedule_interval=timedelta(days=1),
+    schedule=timedelta(days=1),
 )
 
 etl_task = PythonOperator(
